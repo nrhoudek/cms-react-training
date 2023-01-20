@@ -1,0 +1,16 @@
+.slide {
+	display: grid;
+	grid-template-columns: 1fr 0.62fr;
+	gap: 8px;
+}
+.imgCont {
+	position: relative;
+}
+
+.slideTitle {
+	font-family: 'Montserrat';
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: calc(19 / 16);
+	color: #222222;
+}
