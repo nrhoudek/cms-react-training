@@ -21,9 +21,9 @@ export function Comic(props) {
 				<Image
 					src={thumbnail}
 					alt={altDescription}
-					fill
-					size="(min-width: 1024px) 100vw, 50vw"
-					priority
+					className={styles.img}
+					width={125}
+					height={188}
 				/>
 				<Button />
 			</div>

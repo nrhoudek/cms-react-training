@@ -1,12 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBolt } from '@fortawesome/free-solid-svg-icons'
+import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
+import styles from '@/styles/Comic.module.css'
 
 export default function Button() {
 	return (
-		<div>
-			<button className="cta">
-				<FontAwesomeIcon icon={faBolt} />
-			</button>
-		</div>
+		<button className={styles.cta}>
+			<FontAwesomeIcon icon={faBoltLightning} className={styles.btnIcon} />
+		</button>
 	)
 }
