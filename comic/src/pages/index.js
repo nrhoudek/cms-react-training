@@ -7,8 +7,8 @@ export default function Home() {
 	return (
 		<>
 			<Head>
-				<title>Exercise 1</title>
-				<meta name="description" content="Exercise 1 for CMS React Training course" />
+				<title>Exercise 2</title>
+				<meta name="description" content="Exercise 2 for CMS React Training course" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
