@@ -23,7 +23,9 @@ export default function Detail(props) {
 			<div className={`${styles.details} ${karla.variable}`}>
 				<p><strong>Issue:</strong> {issueNumber}</p>
 				<p><strong>Published:</strong> <Moment format="MMMM DD, YYYY">{publishDate}</Moment></p>
-				<p><strong>Creators:</strong> {creators.map(creator => creator.name).join(', ')}</p>
+				{creators != null &&
+					<p><strong>Creators:</strong> {creators.map(creator => creator.name).join(', ')}</p>
+				}
 			</div>
 		</div>
 	)

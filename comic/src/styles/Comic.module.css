@@ -55,7 +55,7 @@
 	color: #f8f8f2;
 }
 
-@media (min-width: 64em) {
+@media (min-width: 40em) {
 	.slide {
 		grid-template-columns: 1fr;
 		grid-template-rows: auto 1fr;
