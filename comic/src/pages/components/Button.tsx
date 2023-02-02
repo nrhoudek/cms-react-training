@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
-import styles from '@/styles/Comic.module.css'
+import styles from '../../styles/Comic.module.css'
 
 export default function Button() {
 	return (

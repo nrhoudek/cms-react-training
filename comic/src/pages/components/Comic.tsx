@@ -1,10 +1,18 @@
 import Image from 'next/image'
 import Button from './Button'
 import Detail from './Detail'
-import PropTypes from 'prop-types';
-import styles from '@/styles/Comic.module.css'
+import styles from '../../styles/Comic.module.css'
 
-export function Comic(props) {
+type Props = {
+	id: number,
+	title: string,
+	issueNumber: number,
+	publishDate: string,
+	creators: string[],
+	thumbnail: string
+}
+
+export function Comic(props: Props) {
 	const {id, title, issueNumber, publishDate, creators, thumbnail} = props
 	const altDescription = `${title} issue:${issueNumber} cover art`
 
@@ -29,12 +37,4 @@ export function Comic(props) {
 			</div>
 		</div>
 	)
-}
-
-Detail.propTypes = {
-	key: PropTypes.number,
-	title: PropTypes.string,
-	issueNumber: PropTypes.number,
-	publishDate: PropTypes.string,
-	creators: PropTypes.array
 }

@@ -1,6 +1,5 @@
 import Moment from 'react-moment';
-import PropTypes from 'prop-types';
-import styles from '@/styles/Comic.module.css'
+import styles from '../../styles/Comic.module.css'
 
 import { Montserrat, Karla } from '@next/font/google'
 
@@ -14,7 +13,14 @@ const karla = Karla({
 	variable: '--font-body',
 })
 
-export default function Detail(props) {
+type Props = {
+	title: string,
+	issueNumber: number,
+	publishDate: string,
+	creators: string[],
+}
+
+export default function Detail(props: Props) {
 	const {title, issueNumber, publishDate, creators } = props
 
 	return (
@@ -29,11 +35,4 @@ export default function Detail(props) {
 			</div>
 		</div>
 	)
-}
-
-Detail.propTypes = {
-	title: PropTypes.string,
-	issueNumber: PropTypes.number,
-	publishDate: PropTypes.string,
-	creators: PropTypes.array
 }
