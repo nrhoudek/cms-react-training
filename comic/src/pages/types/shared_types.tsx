@@ -4,7 +4,7 @@ export type ComicData = {
 	issueNumber?: number,
 	dates?: Date[],
 	creators?: ComicCreator[],
-	thumbnail: ComicThumbnail[],
+	thumbnail?: ComicThumbnail[],
 }[]
 
 export type Date = {
@@ -20,8 +20,7 @@ export type CreatorItem = {
 	name?: string,
 }
 
-
 export type ComicThumbnail = {
-	path: string,
-	extension: string,
+	path?: string,
+	extension?: string,
 }
