@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { Comic } from './components/Comic'
 import useFetch from './hooks/useFetch'
-import { GetStaticProps } from 'next'
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import styles from '../styles/Home.module.css'
 
 const md5 = require('md5');
@@ -15,13 +15,13 @@ export const getStaticProps: GetStaticProps = async() =>  {
 	return { props: { API_URL } }
 }
 
-export default function Home({ API_URL }) {
-	const { isLoading, serverError, apiData } = useFetch(API_URL);
+export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStaticProps>) {
+	const { isLoading, serverError, ComicData } = useFetch(API_URL);
 	return (
 		<>
 			<Head>
-				<title>Exercise 2</title>
-				<meta name="description" content="Exercise 2 for CMS React Training course" />
+				<title>Exercise 3</title>
+				<meta name="description" content="Exercise 3 for CMS React Training course" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
@@ -29,16 +29,17 @@ export default function Home({ API_URL }) {
 			{isLoading && <h2>Loading Comics...</h2>}
 			{serverError && !isLoading && <h2>Error Loading Comics</h2>}
 
-			{!isLoading && !serverError && apiData &&
+			{!isLoading && !serverError && ComicData &&
 				<main className={styles.slides} style={{display: 'grid', gap: '20px 30px', gridTemplateColumns: 'repeat(auto-fill, minmax(183px, 1fr))'}}>
-					{apiData.map(comic =>
+					{ComicData.map(comic =>
 						<Comic 
 							key={comic.id}
+							id={comic.id}
 							title={comic.title}
 							issueNumber={comic.issueNumber}
-							publishDate ={comic.publishDate}
-							creators={comic.creators.items.length > 0 ? comic.creators.items : null}
-							thumbnail={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+							publishDate={comic.dates}
+							creators={comic.creators}
+							thumbnail={comic.thumbnail}
 						/>
 					)}
 				</main>

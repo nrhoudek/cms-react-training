@@ -1,30 +1,35 @@
 import { useEffect, useState } from 'react'
+import { ComicData } from '../types/shared_types'
 
-type Data = {
-	isLoading: boolean,
-	apiData: {
-		key: number,
-		title: string,
-		issueNumber: number,
-		publishDate: string,
-		creators: string[],
-		thumbnail: string,
-	},
-	serverError: string
-}
+// type Data = {
+// 	id: number,
+// 	title?: string,
+// 	issueNumber?: number,
+// 	publishDate?: {
+// 		date?: string
+// 	}[],
+// 	creators?: {
+// 		items?: {
+// 			name?: string
+// 		}
+// 	}[],
+// 	thumbnail?: {
+// 		path?: string,
+// 		extension?: string
+// 	},
+// }[]
 
-export default function useFetch(url: string): Data {
-	const [isLoading, setIsLoading] = useState(false);
-	const [apiData, setApiData] = useState(null);
-	const [serverError, setServerError] = useState(null);
+export default function useFetch(url: string): {isLoading: boolean, ComicData: ComicData, serverError: string | unknown} {
+	const [isLoading, setIsLoading] = useState(true);
+	const [ComicData, setComicData] = useState<ComicData>([{id: 0}]);
+	const [serverError, setServerError] = useState<string | unknown>('');
 
 	const fetchData = async () => {
 		try {
-			setIsLoading(true);
 			const res = await fetch(url);
 			const data = await res.json();
 	
-			setApiData(data.data.results);
+			setComicData(data.data.results);
 			setIsLoading(false);
 			console.log(data.data.results)
 		} catch (error) {
@@ -38,5 +43,5 @@ export default function useFetch(url: string): Data {
 		fetchData();
 	}, []);
 
-	return { isLoading, apiData, serverError };
+	return { isLoading, ComicData, serverError };
 };
