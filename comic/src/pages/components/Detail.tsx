@@ -14,10 +14,10 @@ const karla = Karla({
 })
 
 type DetailProps = {
-	title?: string,
-	issueNumber?: number,
-	publishDate?: Date[],
-	creators?: ComicCreator
+	title: string,
+	issueNumber: number,
+	publishDate: string,
+	creators: ComicCreator
 }
 
 export default function Detail(props: DetailProps) {
@@ -28,8 +28,8 @@ export default function Detail(props: DetailProps) {
 			<h3 className={`${styles.slideTitle} ${montserrat.variable}`}>{title}</h3>
 			<div className={`${styles.details} ${karla.variable}`}>
 				<p><strong>Issue:</strong> {issueNumber}</p>
-				<p><strong>Published:</strong> <Moment format="MMMM DD, YYYY">{publishDate[0].date}</Moment></p>
-				{creators != null &&
+				<p><strong>Published:</strong> <Moment format="MMMM DD, YYYY">{publishDate}</Moment></p>
+				{creators.items.length > 1 &&
 					<p><strong>Creators:</strong> {creators.items.map((creator: CreatorItem) => creator.name).join(', ')}</p>
 				}
 			</div>

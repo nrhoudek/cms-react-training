@@ -5,7 +5,7 @@ export type ComicData = {
 	dates: Date[],
 	creators: ComicCreator,
 	thumbnail: ComicThumbnail,
-}[]
+}
 
 export type Date = {
 	type: string,

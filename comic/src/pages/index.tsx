@@ -16,7 +16,7 @@ export const getStaticProps: GetStaticProps = async() =>  {
 }
 
 export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStaticProps>) {
-	const { isLoading, serverError, ComicData } = useFetch(API_URL);
+	const { isLoading, serverError, comics } = useFetch(API_URL);
 	return (
 		<>
 			<Head>
@@ -29,17 +29,12 @@ export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStat
 			{isLoading && <h2>Loading Comics...</h2>}
 			{serverError && !isLoading && <h2>Error Loading Comics</h2>}
 
-			{!isLoading && !serverError && ComicData &&
+			{!isLoading && !serverError && comics &&
 				<main className={styles.slides} style={{display: 'grid', gap: '20px 30px', gridTemplateColumns: 'repeat(auto-fill, minmax(183px, 1fr))'}}>
-					{ComicData.map(comic =>
+					{comics.map(comic =>
 						<Comic 
 							key={comic.id}
-							id={comic.id}
-							title={comic.title}
-							issueNumber={comic.issueNumber}
-							publishDate={comic.dates}
-							creators={comic.creators}
-							thumbnail={comic.thumbnail}
+							comicData = { comic }
 						/>
 					)}
 				</main>
