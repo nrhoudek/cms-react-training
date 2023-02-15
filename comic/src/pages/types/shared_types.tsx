@@ -1,15 +1,15 @@
 export type ComicData = {
 	id: number,
-	title?: string,
-	issueNumber?: number,
-	dates?: Date[],
-	creators?: ComicCreator[],
-	thumbnail?: ComicThumbnail[],
+	title: string,
+	issueNumber: number,
+	dates: Date[],
+	creators: ComicCreator,
+	thumbnail: ComicThumbnail,
 }[]
 
 export type Date = {
-	type?: string,
-	date?: string,
+	type: string,
+	date: string,
 }
 
 export type ComicCreator = {
@@ -17,10 +17,10 @@ export type ComicCreator = {
 }
 
 export type CreatorItem = {
-	name?: string,
+	name: string,
 }
 
 export type ComicThumbnail = {
-	path?: string,
-	extension?: string,
+	path: string,
+	extension: string,
 }

@@ -17,7 +17,7 @@ type DetailProps = {
 	title?: string,
 	issueNumber?: number,
 	publishDate?: Date[],
-	creators?: ComicCreator[]
+	creators?: ComicCreator
 }
 
 export default function Detail(props: DetailProps) {

@@ -10,8 +10,8 @@ type Props = {
 	title?: string,
 	issueNumber?: number,
 	publishDate?: Date[],
-	creators?: ComicCreator[],
-	thumbnail?: ComicThumbnail[]
+	creators?: ComicCreator,
+	thumbnail?: ComicThumbnail
 }
 
 export function Comic(props: Props) {
