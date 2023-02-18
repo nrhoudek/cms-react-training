@@ -9,11 +9,13 @@ type comicDataProps = {
 }
 
 export function Comic({ comicData }: comicDataProps) {
+	if(!comicData) return null;
+	
 	const thumbnailSrc = `${comicData.thumbnail.path}.${comicData.thumbnail.extension}`
 	const altDescription = `${comicData.title} issue:${comicData.issueNumber} cover art`
 
 	return (
-		<div className={styles.slide}>
+		<div className={styles.slide} data-testid='comic-parent'>
 			<Detail
 				title={comicData.title}
 				issueNumber={comicData.issueNumber}

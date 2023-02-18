@@ -25,12 +25,21 @@ export default function Detail(props: DetailProps) {
 
 	return (
 		<div className={styles.contentSection}>
-			<h3 className={`${styles.slideTitle} ${montserrat.variable}`}>{title}</h3>
+			<h3 className={`${styles.slideTitle} ${montserrat.variable}`} data-testid='comic-title'>{title}</h3>
 			<div className={`${styles.details} ${karla.variable}`}>
-				<p><strong>Issue:</strong> {issueNumber}</p>
-				<p><strong>Published:</strong> <Moment format="MMMM DD, YYYY">{publishDate}</Moment></p>
+				<p data-testid='comic-issueNumber'>
+					<strong>Issue: </strong>
+					{issueNumber}
+				</p>
+				<p data-testid='comic-publishDate'>
+					<strong>Published: </strong>
+					<Moment format="MMMM DD, YYYY">{publishDate}</Moment>
+				</p>
 				{creators.items.length > 1 &&
-					<p><strong>Creators:</strong> {creators.items.map((creator: CreatorItem) => creator.name).join(', ')}</p>
+					<p data-testid='comic-creators'>
+						<strong>Creators: </strong>
+						{creators.items.map((creator: CreatorItem) => creator.name).join(', ')}
+					</p>
 				}
 			</div>
 		</div>

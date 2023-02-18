@@ -34,7 +34,7 @@ export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStat
 					{comics.map(comic =>
 						<Comic 
 							key={comic.id}
-							comicData = { comic }
+							comicData = {comic}
 						/>
 					)}
 				</main>
