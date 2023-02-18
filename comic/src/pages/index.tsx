@@ -20,8 +20,8 @@ export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStat
 	return (
 		<>
 			<Head>
-				<title>Exercise 3</title>
-				<meta name="description" content="Exercise 3 for CMS React Training course" />
+				<title>Exercise 4</title>
+				<meta name="description" content="Exercise 4 for CMS React Training course" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
