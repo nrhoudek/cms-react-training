@@ -1,3 +1,4 @@
+import styles from '../../styles/Footer.module.css'
 import { Montserrat } from '@next/font/google'
 
 const montserrat = Montserrat({
@@ -12,6 +13,6 @@ type FooterLinkType = {
 
 export default function FooterLink({ url, caption }: FooterLinkType) {
 	return (
-		<a href={url} target='_blank'>{caption}</a>
+		<a href={url} target='_blank'className={`${styles.link} ${montserrat.variable}`}>{caption}</a>
 	)
 }

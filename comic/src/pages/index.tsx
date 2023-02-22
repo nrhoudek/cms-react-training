@@ -30,20 +30,15 @@ export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStat
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<header>
-				<Header />
-			</header>
-			<section>
-				<HeroImage />
-			</section>
-			{isLoading && <h2>Loading Comics...</h2>}
-			{serverError && !isLoading && <h2>Error Loading Comics</h2>}
+			<Header />
+			<HeroImage />
 
-			{!isLoading && !serverError && comics &&
-				<main>
-					<div>
-						<Intro />
-					</div>
+			<main>
+				<Intro />
+
+				{isLoading && <h2>Loading Comics...</h2>}
+				{serverError && !isLoading && <h2>Error Loading Comics</h2>}
+				{!isLoading && !serverError && comics &&
 					<div className={styles.slides} style={{display: 'grid', gap: '20px 30px', gridTemplateColumns: 'repeat(auto-fill, minmax(183px, 1fr))'}}>
 						{comics.map(comic =>
 							<Comic 
@@ -52,11 +47,10 @@ export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStat
 							/>
 						)}
 					</div>
-				</main>
-			}
-			<footer>
-				<Footer />
-			</footer>
+				}
+			</main>
+			
+			<Footer />
 		</>
 	)
 }

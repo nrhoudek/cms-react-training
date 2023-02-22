@@ -1,0 +1,97 @@
+.navigationContainer {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.mainNav {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background: #222222;
+	opacity: 0;
+	pointer-events: none;
+	padding: 15px;
+	transition: opacity 300ms ease-out;
+}
+
+.mainNav.active {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.navLink,
+.favoritesCaption,
+.favoritesNumber {
+	font-family: var(--font-display);
+	font-size: 1.125rem;
+	font-weight: 700;
+	line-height: 1;
+	color: #f8f8f2;
+	text-decoration: none;
+}
+
+.navLink {
+	padding: 0 15px;
+}
+
+.favoritesCaption {
+	display: none;
+}
+
+.favoritesNumber {
+	font-weight: 400;
+}
+
+.favoritesContainer {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+}
+
+.favoritesContainer svg {
+	width: 11px;
+	height: 18px;
+	color: #f8f8f2;
+}
+
+.mobileMenuButton {
+	width: 55px;
+	height: 43px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: unset;
+	border: 2px solid #f8f8f2;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.mobileMenuButton svg {
+	width: 18px;
+	height: 21px;
+	color: #f8f8f2
+}
+
+@media (min-width: 64em) {
+	.navigationContainer .mainNav {
+		display: block;
+		position: static;
+		background: unset;
+		opacity: 1;
+		padding: 0;
+		pointer-events: all;
+	}
+
+	.mobileMenuButton {
+		display: none;
+	}
+
+	.favoritesCaption {
+		display: inline-block;
+	}
+}
