@@ -1,4 +1,4 @@
-import styles from '../../styles/Intro.module.css'
+import styles from '../../../styles/common/Intro.module.css'
 import { Montserrat } from '@next/font/google'
 
 const montserrat = Montserrat({

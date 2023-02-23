@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import styles from '../../styles/HeroImage.module.css'
+import styles from '../../../styles/hero/HeroImage.module.css'
 
 import { Montserrat } from '@next/font/google'
 
@@ -14,9 +14,8 @@ return (
 		<Image
 			src='/hero-photo.png'
 			alt='Collage of Comic Books from the angle of a person looking down at their feet'
-			width={375}
-			height={450}
 			className={styles.heroImage}
+			fill
 			priority
 		/>
 		

@@ -1,6 +1,7 @@
 .heroContainer {
 	position: relative;
-	width: 100%;
+	width: 100vw;
+	height: 450px;
 	margin-bottom: 40px;
 	overflow: hidden;
 }
@@ -20,12 +21,12 @@
 .heroContainer::after {
 	content: '';
 	position: absolute;
-	bottom: -5px;
+	bottom: -10px;
 	left: 0;
 	width: 100%;
 	height: 112px;
 	z-index: 1;
-	background: url(../../public/halftone.png);
+	background: url(../../../public/halftone.png);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center bottom;
@@ -34,7 +35,8 @@
 
 .heroImage {
 	max-width: 100%;
-	width: 100%;
+	background-size: cover;
+	background-position: center;
 }
 
 .heroTitle {
@@ -61,11 +63,13 @@
 
 @media (min-width: 64em) {
 	.heroContainer {
+		height: 650px;
 		margin-bottom: 64px;
 	}
 
 	.heroContainer::after {
 		height: 176px;
+		bottom: -20px;
 		z-index: 1;
 	}
 
@@ -75,5 +79,11 @@
 		font-size: 3.8125rem;
 		text-shadow: 3px 3px 0 #222222;
 		padding: 36px 69px;
+	}
+}
+
+@media (min-width: 90em) {
+	.heroContainer {
+		height: 867px;
 	}
 }

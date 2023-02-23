@@ -48,11 +48,24 @@
 	border: 2px solid #222222;
 	border-radius: 100%;
 	cursor: pointer;
+	transition: border-color 300ms ease-out, background-color 300ms ease-out
+}
+
+.cta.selected {
+	border-color: #f8f8f2;
+	background-color: #c24868;
 }
 
 .btnIcon {
 	font-size: 1rem;
 	color: #f8f8f2;
+}
+
+@media (hover: hover) {
+	.cta:hover {
+		border-color: #f8f8f2;
+		background-color: #c24868;
+	}
 }
 
 @media (min-width: 40em) {

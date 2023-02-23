@@ -1,6 +1,5 @@
 .introSection {
 	max-width: 640px;
-	padding: 0 20px;
 	margin: 0 auto;
 	margin-bottom: 40px;
 }
@@ -48,6 +47,6 @@
 		position: relative;
 		z-index: 1;
 		font-size: 3.0625rem;
-		margin-bottom: 25px;
+		margin-bottom: 30px;
 	}
 }

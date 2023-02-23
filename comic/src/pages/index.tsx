@@ -1,12 +1,13 @@
 import Head from 'next/head'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { Comic } from './components/Comic'
-import Footer from './components/Footer'
-import Header from './components/Header'
-import HeroImage from './components/HeroImage'
-import Intro from './components/Intro'
+import { Comic } from './components/Comic/Comic'
+import Footer from './components/Footer/Footer'
+import Header from './components/Header/Header'
+import HeroImage from './components/HeroImage/HeroImage'
+import Intro from './components/Common/Intro'
+import Filter from './components/Filter/Filter'
 import useFetch from './hooks/useFetch'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/home/Home.module.css'
 
 const md5 = require('md5');
 
@@ -33,13 +34,14 @@ export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStat
 			<Header />
 			<HeroImage />
 
-			<main>
+			<main className={styles.main}>
 				<Intro />
+				<Filter />
 
 				{isLoading && <h2>Loading Comics...</h2>}
 				{serverError && !isLoading && <h2>Error Loading Comics</h2>}
 				{!isLoading && !serverError && comics &&
-					<div className={styles.slides} style={{display: 'grid', gap: '20px 30px', gridTemplateColumns: 'repeat(auto-fill, minmax(183px, 1fr))'}}>
+					<div className={styles.slides}>
 						{comics.map(comic =>
 							<Comic 
 								key={comic.id}

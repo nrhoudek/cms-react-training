@@ -10,12 +10,22 @@
 	padding: 20px;
 }
 
+.logoContainer {
+	position: relative;
+	overflow: hidden;
+	width: 75px;
+	height: 75px;
+}
+
 @media (min-width: 64em) {
 	.headerContainer {
 		padding: 20px 60px;
 	}
 
-	.logo {
-		max-width: 106px;
+	.logoContainer {
+		position: relative;
+		overflow: hidden;
+		width: 106px;
+		height: 106px;
 	}
 }

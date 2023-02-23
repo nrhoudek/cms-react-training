@@ -1,0 +1,14 @@
+.main {
+	padding: 0 1.25rem;
+}
+
+.slides {
+	min-height: 100vh;
+	max-width: 1075px;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(183px, 1fr));
+	gap: 20px 30px;
+	padding: 1.25rem 0;
+	margin: 0 auto;
+}
+

@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Button from './Button'
 import Detail from './Detail'
-import styles from '../../styles/Comic.module.css'
-import {ComicData} from '../types/shared_types'
+import styles from '../../../styles/comic/Comic.module.css'
+import { ComicData } from '../../types/shared_types'
 
 type comicDataProps = {
 	comicData: ComicData
@@ -30,7 +30,7 @@ export function Comic({ comicData }: comicDataProps) {
 					width={125}
 					height={188}
 				/>
-				<Button />
+				<Button comicData={comicData} />
 			</div>
 		</div>
 	)

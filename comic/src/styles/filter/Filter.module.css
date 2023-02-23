@@ -1,0 +1,27 @@
+.filterContainer {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: #222222;
+	padding: 20px 10px;
+	max-width: 1075px;
+	margin: 0 auto;
+}
+
+.filterButton {
+	font-family: var(--font-display);
+	font-size: 0.875rem;
+	font-weight: 700;
+	line-height: 1;
+	color: #f8f8f2;
+	background: unset;
+	padding: 5px 0;
+	border: unset;
+	cursor: pointer;
+}
+
+.filterButton svg {
+	color: #f8f8f2;
+	margin-left: 5px;
+}
