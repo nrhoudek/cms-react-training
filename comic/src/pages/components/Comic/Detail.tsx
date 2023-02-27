@@ -1,6 +1,6 @@
 import Moment from 'react-moment';
 import styles from '../../../styles/comic/Comic.module.css'
-import {ComicCreator, Date, CreatorItem} from '../../types/shared_types'
+import {ComicCreator, CreatorItem} from '../../types/shared_types'
 import { Montserrat, Karla } from '@next/font/google'
 
 const montserrat = Montserrat({

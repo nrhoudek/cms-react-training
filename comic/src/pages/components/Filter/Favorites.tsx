@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { appContextType, appContext } from '../../context/index'
+import { favoritesContextType, favoritesContext } from '../../context/favorites'
 import FavoritesItem from './FavoritesItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
@@ -18,35 +18,37 @@ type FavoritesProps = {
 
 export default function Favorites({handleCloseButtonClick}: FavoritesProps) {
 
-	const context = useContext<appContextType>(appContext)
+	const context = useContext<favoritesContextType>(favoritesContext)
 
 	return (
-		<>
 			<div className={styles.favoritesContainer}>
-				<h2 className={`${styles.favoritesTitle} ${montserrat.variable}`}>Favorites</h2>
+				<div className={styles.inner}>
+					<h2 className={`${styles.favoritesTitle} ${montserrat.variable}`}>Favorites</h2>
+					<div className={styles.comicGrid}>
+						{
+							context.favorites.map((comic) => {
+								return (
+									<FavoritesItem 
+										key={comic.id}
+										id={comic.id}
+										title={comic.title}
+										issueNumber={comic.issueNumber}
+										thumbnail={comic.thumbnail}
+									/>
+								)
+							})
+						}
+					</div>
+				</div>
+				<button
+					className={`${styles.closeButton} ${montserrat.variable}`}
+					onClick={handleCloseButtonClick}
+				>
+					Hide Favorites
+					<FontAwesomeIcon icon={faBoltLightning} />
+				</button>
 			</div>
-			<div>
-				{
-					context.favorites.map((comic) => {
-						return (
-							<FavoritesItem 
-								key={comic.id}
-								// id={comic.id}
-								// title={comic.title}
-								// issue={comic.issueNumber}
-								// thumbnail={comic.thumbnail}
-							/>
-						)
-					})
-				}
-			</div>
-			<button
-				className={`${styles.closeButton} ${montserrat.variable}`}
-				onClick={handleCloseButtonClick}
-			>
-				Hide Favorites
-				<FontAwesomeIcon icon={faBoltLightning} />
-			</button>
-		</>
+			
+			
 	)
 }

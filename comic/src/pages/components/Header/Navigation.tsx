@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { favoritesContext, favoritesContextType } from '../../context/favorites'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
@@ -17,6 +18,8 @@ export default function Navigation() {
 		setShowNav(!showNav);
 	}
 
+	const context = useContext<favoritesContextType>(favoritesContext)
+
 	return (
 		<div className={`${styles.navigationContainer} ${montserrat.variable}`}>
 			<nav className={showNav ? `${styles.mainNav} ${styles.active}` : `${styles.mainNav}`}>
@@ -26,7 +29,7 @@ export default function Navigation() {
 			<div className={styles.favoritesContainer}>
 				<FontAwesomeIcon icon={faBoltLightning} />
 				<span className={styles.favoritesCaption}>My Favorites</span>
-				<span className={styles.favoritesNumber}>(0)</span>
+				<span className={styles.favoritesNumber}>({context.favorites.length})</span>
 			</div>
 			<button className={styles.mobileMenuButton} onClick={toggleNav}>
 				<FontAwesomeIcon icon={faBars} />

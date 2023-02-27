@@ -56,6 +56,11 @@
 	background-color: #c24868;
 }
 
+.cta.disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
 .btnIcon {
 	font-size: 1rem;
 	color: #f8f8f2;

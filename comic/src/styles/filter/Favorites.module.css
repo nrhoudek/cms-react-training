@@ -3,6 +3,11 @@
 	position: relative;
 	z-index: 1;
 	background-color: #222222;
+	max-width: 1075px;
+	margin: 0 auto;
+}
+
+.inner {
 	padding: 20px 30px;
 }
 
@@ -13,6 +18,12 @@
 	line-height: 1.2;
 	color: #f8f8f2;
 	margin-bottom: 30px;
+}
+
+.comicGrid {
+	display: grid;
+	place-items: start;
+	gap: 46px;
 }
 
 .closeButton {
@@ -28,6 +39,7 @@
 	padding: 13px;
 	border: unset;
 	width: 100%;
+	cursor: pointer;
 }
 
 .closeButton svg {

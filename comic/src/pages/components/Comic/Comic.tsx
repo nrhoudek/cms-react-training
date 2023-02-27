@@ -1,6 +1,8 @@
+import { useContext } from 'react'
 import Image from 'next/image'
 import Button from './Button'
 import Detail from './Detail'
+import { favoritesContext, favoritesContextType } from '../../context/favorites'
 import styles from '../../../styles/comic/Comic.module.css'
 import { ComicData } from '../../types/shared_types'
 
@@ -10,6 +12,11 @@ type comicDataProps = {
 
 export function Comic({ comicData }: comicDataProps) {
 	if(!comicData) return null;
+
+	const context = useContext<favoritesContextType>(favoritesContext)
+
+	const isFavoritesFull: boolean = context.favorites.length >= 10;
+	const isFavorite: ComicData = context.favorites.find(favorite => favorite.id === comicData.id);
 	
 	const thumbnailSrc = `${comicData.thumbnail.path}.${comicData.thumbnail.extension}`
 	const altDescription = `${comicData.title} issue:${comicData.issueNumber} cover art`
@@ -30,7 +37,11 @@ export function Comic({ comicData }: comicDataProps) {
 					width={125}
 					height={188}
 				/>
-				<Button comicData={comicData} />
+				<Button 
+					comicData={comicData}
+					isFavorite={isFavorite}
+					isFavoritesFull={isFavoritesFull}
+				/>
 			</div>
 		</div>
 	)

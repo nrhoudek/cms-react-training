@@ -1,6 +1,9 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { Comic } from './components/Comic/Comic'
+import { ComicData } from './types/shared_types'
+import { favoritesContext } from './context/favorites'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 import HeroImage from './components/HeroImage/HeroImage'
@@ -22,6 +25,13 @@ export const getStaticProps: GetStaticProps = async() =>  {
 
 export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStaticProps>) {
 	const { isLoading, serverError, comics } = useFetch(API_URL);
+	const [favorites, setFavorites] = useState<ComicData[]>([]);
+
+	const contextValue = {
+		favorites,
+		setFavorites
+	}
+	
 	return (
 		<>
 			<Head>
@@ -31,28 +41,32 @@ export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStat
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<Header />
-			<HeroImage />
+			<favoritesContext.Provider value={contextValue} >
+				<Header />
+				<HeroImage />
 
-			<main className={styles.main}>
-				<Intro />
-				<Filter />
+				<main className={styles.main}>
+					<Intro />
+					<Filter />
 
-				{isLoading && <h2>Loading Comics...</h2>}
-				{serverError && !isLoading && <h2>Error Loading Comics</h2>}
-				{!isLoading && !serverError && comics &&
-					<div className={styles.slides}>
-						{comics.map(comic =>
-							<Comic 
-								key={comic.id}
-								comicData = {comic}
-							/>
-						)}
-					</div>
-				}
-			</main>
-			
-			<Footer />
+					{isLoading && <h2>Loading Comics...</h2>}
+					{serverError && !isLoading && <h2>Error Loading Comics</h2>}
+					{!isLoading && !serverError && comics &&
+
+							<div className={styles.slides}>
+								{comics.map(comic =>
+									<Comic 
+										key={comic.id}
+										comicData = {comic}
+									/>
+								)}
+							</div>
+
+					}
+				</main>
+				
+				<Footer />
+			</favoritesContext.Provider>
 		</>
 	)
 }
