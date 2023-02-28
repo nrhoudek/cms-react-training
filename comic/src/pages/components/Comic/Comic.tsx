@@ -34,8 +34,8 @@ export function Comic({ comicData }: comicDataProps) {
 					src={thumbnailSrc}
 					alt={altDescription}
 					className={styles.img}
-					width={125}
-					height={188}
+					width={183}
+					height={276}
 				/>
 				<Button 
 					comicData={comicData}

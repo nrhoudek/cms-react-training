@@ -1,7 +1,8 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { Comic } from './components/Comic/Comic'
+import  Favorites from './components/Filter/Favorites'
 import { ComicData } from './types/shared_types'
 import { favoritesContext } from './context/favorites'
 import Footer from './components/Footer/Footer'
@@ -31,6 +32,13 @@ export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStat
 		favorites,
 		setFavorites
 	}
+
+	useEffect(() => {
+		const favoriteComicsList = localStorage.getItem("Favorite_Comics");
+		if (favoriteComicsList) {
+			setFavorites(JSON.parse(favoriteComicsList));
+		}
+	}, []);
 	
 	return (
 		<>
@@ -47,21 +55,24 @@ export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStat
 
 				<main className={styles.main}>
 					<Intro />
-					<Filter />
-
+					
 					{isLoading && <h2>Loading Comics...</h2>}
 					{serverError && !isLoading && <h2>Error Loading Comics</h2>}
 					{!isLoading && !serverError && comics &&
-
-							<div className={styles.slides}>
-								{comics.map(comic =>
-									<Comic 
-										key={comic.id}
-										comicData = {comic}
-									/>
-								)}
-							</div>
-
+					<div className={styles.gridContainer}>
+						<Filter />
+						<div className={styles.slides}>
+							{comics.map(comic =>
+								<Comic 
+									key={comic.id}
+									comicData = {comic}
+								/>
+							)}
+						</div>
+						<div className={styles.desktopFavorites}>
+							<Favorites handleCloseButtonClick={() => null} />
+						</div>
+					</div>
 					}
 				</main>
 				

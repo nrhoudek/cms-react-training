@@ -36,7 +36,10 @@ export default function FavoritesItem( props: FavoriteItemProp ) {
 			const newFavorites: ComicData[] = [...prevFavorites]
 			const index: number = prevFavorites.findIndex(favorite => favorite.id === id);
 			newFavorites.splice(index, 1);
-			console.log(newFavorites);
+			localStorage.setItem(
+				"Favorite_Comics",
+				JSON.stringify(newFavorites)
+			);
 			return newFavorites;
 		});
 		return;

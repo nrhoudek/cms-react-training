@@ -23,7 +23,10 @@ export default function Button({ comicData, isFavorite, isFavoritesFull }: butto
 
 		context.setFavorites(prevFavorites => {
 			const newFavorites: ComicData[] = [...prevFavorites, {...comicData}]
-			console.log(newFavorites);
+			localStorage.setItem(
+				"Favorite_Comics",
+				JSON.stringify(newFavorites)
+			);
 			return newFavorites;
 		});
 	}
@@ -33,7 +36,10 @@ export default function Button({ comicData, isFavorite, isFavoritesFull }: butto
 			const newFavorites: ComicData[] = [...prevFavorites]
 			const index: number = prevFavorites.findIndex(favorite => favorite.id === comicData.id);
 			newFavorites.splice(index, 1);
-			console.log(newFavorites);
+			localStorage.setItem(
+				"Favorite_Comics",
+				JSON.stringify(newFavorites)
+			);
 			return newFavorites;
 		});
 		return;
