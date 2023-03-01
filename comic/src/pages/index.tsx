@@ -1,10 +1,11 @@
 import Head from 'next/head'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { Comic } from './components/Comic/Comic'
 import  Favorites from './components/Filter/Favorites'
 import { ComicData } from './types/shared_types'
 import { favoritesContext } from './context/favorites'
+import { queryContext } from './context/query'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 import HeroImage from './components/HeroImage/HeroImage'
@@ -25,7 +26,9 @@ export const getStaticProps: GetStaticProps = async() =>  {
 }
 
 export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStaticProps>) {
+	// const { query, setQuery } = useContext(queryContext);
 	const { isLoading, serverError, comics } = useFetch(API_URL);
+	const [query, setQuery] = useState<string>('');
 	const [favorites, setFavorites] = useState<ComicData[]>([]);
 
 	const contextValue = {
@@ -34,17 +37,38 @@ export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStat
 	}
 
 	useEffect(() => {
+		if (query === '') {
+			const { isLoading, serverError, comics } = useFetch(API_URL)
+			console.log('YOOO')
+		} else {
+			const { isLoading, serverError, comics } = useFetch(query);
+			console.log('Yeeeee')
+		}
+	}, [query])
+
+	useEffect(() => {
 		const favoriteComicsList = localStorage.getItem("Favorite_Comics");
 		if (favoriteComicsList) {
 			setFavorites(JSON.parse(favoriteComicsList));
 		}
 	}, []);
+
+	function updateFilter(event: React.ChangeEvent) {
+		const target = event.target as HTMLSelectElement;
+		const value = target.value;
+
+		let newUrl=`https://gateway.marvel.com/v1/public/characters/${value}/comics`
+		setQuery(newUrl)
+		console.log(query);
+	}
+
+	
 	
 	return (
 		<>
 			<Head>
 				<title>Final Exercise</title>
-				<meta name="description" content="Final for CMS React Training course" />
+				<meta name="description" content="Final Project for CMS React Training course" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
@@ -60,7 +84,7 @@ export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStat
 					{serverError && !isLoading && <h2>Error Loading Comics</h2>}
 					{!isLoading && !serverError && comics &&
 					<div className={styles.gridContainer}>
-						<Filter />
+						<Filter updateFilter={updateFilter}/>
 						<div className={styles.slides}>
 							{comics.map(comic =>
 								<Comic 

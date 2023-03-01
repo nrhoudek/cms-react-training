@@ -12,7 +12,11 @@ const montserrat = Montserrat({
 	variable: '--font-display',
 })
 
-export default function Filter() {
+type FilterProps = {
+	updateFilter(event: React.ChangeEvent): void;
+}
+
+export default function Filter({ updateFilter }: FilterProps) {
 	const [showFilterOptions, setShowFilterOptions] = useState<boolean>(false);
 	const [showFavorites, setShowFavorites] = useState<boolean>(false);
 
@@ -31,7 +35,7 @@ export default function Filter() {
 						}}
 					/>
 					{showFilterOptions &&
-						<FilterOptions />
+						<FilterOptions updateFilter={updateFilter} />
 					}
 					{showFavorites &&
 						<Favorites handleCloseButtonClick={() => setShowFavorites(!showFavorites)}/>
@@ -39,7 +43,7 @@ export default function Filter() {
 				</div>
 				<div className={styles.desktopFilter}>
 					<span className={`${styles.filterLabel} ${montserrat.variable}`}>Filter By: </span>
-					<FilterOptions />
+					<FilterOptions updateFilter={updateFilter} />
 				</div>
 			</div>
 			

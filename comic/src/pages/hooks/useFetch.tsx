@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { ComicData } from '../types/shared_types'
 
 export default function useFetch(url: string): {isLoading: boolean, comics: ComicData[], serverError: string | unknown} {
@@ -21,7 +21,7 @@ export default function useFetch(url: string): {isLoading: boolean, comics: Comi
 		}
 	};
 	
-	useEffect(() =>{
+	useEffect(() => {
 		fetchData();
 	}, []);
 

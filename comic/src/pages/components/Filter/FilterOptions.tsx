@@ -1,4 +1,5 @@
-import { useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import useFetch from '../../hooks/useFetch'
 import styles from '../../../styles/filter/FilterOptions.module.css'
 import { Karla } from '@next/font/google'
 
@@ -7,11 +8,15 @@ const karla = Karla({
 	variable: '--font-display',
 })
 
-export default function Favorites() {
+type FilterOptionProps = {
+	updateFilter(event: React.ChangeEvent): void;
+}
+
+export default function FilterOptions({ updateFilter }: FilterOptionProps) {
 	return (
 		<div className={styles.filterOptionsContainer}>
-			<select name="charcterFilter" id="characterFilter" className={`${styles.filterFields} ${karla.variable}`}>
-				<option value="Character">Character</option>
+			<select name="charcterFilter" id="characterFilter" onChange={updateFilter} data-character-filter className={`${styles.filterFields} ${karla.variable}`}>
+				<option value="">Character</option>
 				<option value="1009368">Iron Man</option>
 				<option value="1009220">Captain America</option>
 				<option value="1009664">Thor</option>
@@ -21,8 +26,8 @@ export default function Favorites() {
 				<option value="1009707">Wasp</option>
 				<option value="1010763">Gamora</option>
 			</select>
-			<select name="creatorFilter" id="creatorFilter" className={`${styles.filterFields} ${karla.variable}`}>
-				<option value="Creator">Creator</option>
+			<select name="creatorFilter" id="creatorFilter" onChange={updateFilter} data-creator-filter className={`${styles.filterFields} ${karla.variable}`}>
+				<option value="">Creator</option>
 				<option value="12787">Kate Leth</option>
 				<option value="24">Brian Michael Bendis</option>
 				<option value="30">Stan Lee</option>
