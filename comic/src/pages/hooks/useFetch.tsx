@@ -1,10 +1,15 @@
 import { useEffect, useState, useContext } from 'react'
+import { queryContext, queryContextType } from '../context/query';
 import { ComicData } from '../types/shared_types'
 
 export default function useFetch(url: string): {isLoading: boolean, comics: ComicData[], serverError: string | unknown} {
-	const [isLoading, setIsLoading] = useState(true);
-	const [comics, setComics] = useState<ComicData[]>([]);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [serverError, setServerError] = useState<string | unknown>('');
+	const [comics, setComics] = useState<ComicData[]>([]);
+
+	// let context = useContext<queryContextType>(queryContext)
+	// console.log('query hiho', context.query)
+	// console.log(url)
 
 	const fetchData = async () => {
 		try {
@@ -23,7 +28,7 @@ export default function useFetch(url: string): {isLoading: boolean, comics: Comi
 	
 	useEffect(() => {
 		fetchData();
-	}, []);
+	}, [url]);
 
 	return { isLoading, comics, serverError };
 };

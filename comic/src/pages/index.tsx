@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { Comic } from './components/Comic/Comic'
 import  Favorites from './components/Filter/Favorites'
@@ -20,31 +20,20 @@ const md5 = require('md5');
 export const getStaticProps: GetStaticProps = async() =>  {
 	const timestamp: number = Date.now();
 	const hash: string = md5(`${timestamp}${process.env.PRIVATE_API_KEY}${process.env.PUBLIC_API_KEY}`)
+	const publicKey: string = process.env.PUBLIC_API_KEY
+	const requiredParameters = `ts=${timestamp}&apikey=${publicKey}&hash=${hash}`
 
-	let API_URL: string = `https://gateway.marvel.com:443/v1/public/comics?ts=${timestamp}&apikey=${process.env.PUBLIC_API_KEY}&hash=${hash}`
-	return { props: { API_URL } }
+	let API_URL: string = `https://gateway.marvel.com/v1/public/comics?${requiredParameters}`
+	return { props: { API_URL, requiredParameters } }
 }
 
-export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStaticProps>) {
-	// const { query, setQuery } = useContext(queryContext);
-	const { isLoading, serverError, comics } = useFetch(API_URL);
-	const [query, setQuery] = useState<string>('');
+export default function Home({ API_URL, requiredParameters }: InferGetStaticPropsType<typeof getStaticProps>) {
+	const [query, setQuery] = useState<string>(API_URL);
+	const { isLoading, serverError, comics } = useFetch(query);
 	const [favorites, setFavorites] = useState<ComicData[]>([]);
-
-	const contextValue = {
-		favorites,
-		setFavorites
-	}
-
-	useEffect(() => {
-		if (query === '') {
-			const { isLoading, serverError, comics } = useFetch(API_URL)
-			console.log('YOOO')
-		} else {
-			const { isLoading, serverError, comics } = useFetch(query);
-			console.log('Yeeeee')
-		}
-	}, [query])
+	const [characterId, setCharacterId] = useState<string>('');
+	const [creatorId, setCreatorId] = useState<string>('');
+	let initialRender = useRef(true);
 
 	useEffect(() => {
 		const favoriteComicsList = localStorage.getItem("Favorite_Comics");
@@ -53,17 +42,42 @@ export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStat
 		}
 	}, []);
 
+	useEffect(() => {
+		if (!initialRender.current) {
+			let newQuery: string;
+
+			if (characterId !== '' && creatorId === '') {
+				newQuery=`https://gateway.marvel.com/v1/public/characters/${characterId}/comics?${requiredParameters}`
+			} else if (characterId === '' && creatorId !== '') {
+				newQuery=`https://gateway.marvel.com/v1/public/creators/${creatorId}/comics?${requiredParameters}`
+			} else if (characterId !== '' && creatorId !== '') {
+				newQuery = `https://gateway.marvel.com/v1/public/creators/${creatorId}/comics?characters=${characterId}&${requiredParameters}`
+			}
+			else {
+				newQuery = API_URL;
+			}
+			setQuery(newQuery);
+		}
+
+		//Prevents this useEffect from Running on first render with a new empty query. We run our first render from the server getStaticProps function
+		return () => {
+			initialRender.current = false;
+		}
+	}, [characterId, creatorId])
+
 	function updateFilter(event: React.ChangeEvent) {
 		const target = event.target as HTMLSelectElement;
-		const value = target.value;
+		const id = target.value;
+		const name = target.name;
 
-		let newUrl=`https://gateway.marvel.com/v1/public/characters/${value}/comics`
-		setQuery(newUrl)
-		console.log(query);
+		name === 'characterFilter' ? setCharacterId(id) : setCreatorId(id)
 	}
 
-	
-	
+	const contextValue = {
+		favorites,
+		setFavorites
+	}
+
 	return (
 		<>
 			<Head>
@@ -73,31 +87,33 @@ export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStat
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<favoritesContext.Provider value={contextValue} >
+			<favoritesContext.Provider value={contextValue}>
 				<Header />
 				<HeroImage />
 
 				<main className={styles.main}>
 					<Intro />
-					
+
 					{isLoading && <h2>Loading Comics...</h2>}
 					{serverError && !isLoading && <h2>Error Loading Comics</h2>}
-					{!isLoading && !serverError && comics &&
-					<div className={styles.gridContainer}>
-						<Filter updateFilter={updateFilter}/>
-						<div className={styles.slides}>
-							{comics.map(comic =>
-								<Comic 
-									key={comic.id}
-									comicData = {comic}
-								/>
-							)}
+					{!serverError && !isLoading && comics.length === 0 && <h2>No comics match filter requirements</h2>}
+					{!serverError && !isLoading && comics &&
+						<div className={styles.gridContainer}>
+							<Filter updateFilter={updateFilter}/>
+							<div className={styles.slides}>
+								{comics.map(comic =>
+									<Comic 
+										key={comic.id}
+										comicData = {comic}
+									/>
+								)}
+							</div>
+							<div className={styles.desktopFavorites}>
+								<Favorites handleCloseButtonClick={() => null} />
+							</div>
 						</div>
-						<div className={styles.desktopFavorites}>
-							<Favorites handleCloseButtonClick={() => null} />
-						</div>
-					</div>
 					}
+					
 				</main>
 				
 				<Footer />
