@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Navigation from './Navigation'
-import styles from '../../../styles/header/Header.module.css'
+import styles from '../../styles/header/Header.module.css'
 
 export default function Header() {
 	return (

@@ -1,17 +1,17 @@
 import Head from 'next/head'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useState, useEffect, useRef } from 'react'
-import { favoritesContext } from './context/favorites'
-import { ComicData } from './types/shared_types'
-import Header from './components/Header/Header'
-import HeroImage from './components/HeroImage/HeroImage'
-import Intro from './components/Common/Intro'
-import Filter from './components/Filter/Filter'
-import Comic from './components/Comic/Comic'
-import Favorites from './components/Filter/Favorites'
-import Footer from './components/Footer/Footer'
-import Pager from './components/Pager/Pager'
-import useFetch from './hooks/useFetch'
+import { favoritesContext } from '../context/favorites'
+import { ComicData } from '../types/shared_types'
+import Header from '../components/Header/Header'
+import HeroImage from '../components/HeroImage/HeroImage'
+import Intro from '../components/Common/Intro'
+import Filter from '../components/Filter/Filter'
+import Comic from '../components/Comic/Comic'
+import Favorites from '../components/Filter/Favorites'
+import Footer from '../components/Footer/Footer'
+import Pager from '../components/Pager/Pager'
+import useFetch from '../hooks/useFetch'
 import styles from '../styles/home/Home.module.css'
 import { Montserrat } from '@next/font/google'
 
@@ -136,7 +136,7 @@ export default function Home({ API_URL, requiredParameters, comicLimit }: InferG
 									: comics.map(comic =>
 										<Comic 
 											key={comic.id}
-											comicData = {comic}
+											comicData={comic}
 										/>
 									)
 								}

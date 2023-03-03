@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import { favoritesContext, favoritesContextType } from '../../context/favorites'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoltLightning, faBars } from '@fortawesome/free-solid-svg-icons'
-import styles from '../../../styles/header/Navigation.module.css'
+import styles from '../../styles/header/Navigation.module.css'
 import { Montserrat } from '@next/font/google'
 
 const montserrat = Montserrat({

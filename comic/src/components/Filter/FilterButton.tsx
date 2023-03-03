@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
-import styles from '../../../styles/filter/Filter.module.css'
+import styles from '../../styles/filter/Filter.module.css'
 
 import { Montserrat } from '@next/font/google'
 

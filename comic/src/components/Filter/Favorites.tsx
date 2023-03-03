@@ -3,7 +3,7 @@ import { favoritesContextType, favoritesContext } from '../../context/favorites'
 import FavoritesItem from './FavoritesItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
-import styles from '../../../styles/filter/Favorites.module.css'
+import styles from '../../styles/filter/Favorites.module.css'
 
 import { Montserrat } from '@next/font/google'
 

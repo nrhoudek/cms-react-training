@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
 import { ComicData } from '../../types/shared_types'
 import { favoritesContext, favoritesContextType } from '../../context/favorites'
-import styles from '../../../styles/comic/Comic.module.css'
+import styles from '../../styles/comic/Comic.module.css'
 
 type buttonProps = {
 	comicData: ComicData;

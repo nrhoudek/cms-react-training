@@ -4,7 +4,7 @@ import { favoritesContext, favoritesContextType } from '../../context/favorites'
 import { ComicData } from '../../types/shared_types'
 import Button from './Button'
 import Detail from './Detail'
-import styles from '../../../styles/comic/Comic.module.css'
+import styles from '../../styles/comic/Comic.module.css'
 
 type comicDataProps = {
 	comicData: ComicData;

@@ -3,7 +3,7 @@ import FilterButton from './FilterButton'
 import FilterOptions from './FilterOptions'
 import Favorites from './Favorites'
 import { faBoltLightning, faFilter } from '@fortawesome/free-solid-svg-icons'
-import styles from '../../../styles/filter/Filter.module.css'
+import styles from '../../styles/filter/Filter.module.css'
 
 import { Montserrat } from '@next/font/google'
 

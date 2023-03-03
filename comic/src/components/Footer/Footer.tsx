@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import FooterLink from './FooterLink'
 import Copyright from './Copyright'
-import styles from '../../../styles/footer/Footer.module.css'
+import styles from '../../styles/footer/Footer.module.css'
 
 export default function Footer() {
 	return (

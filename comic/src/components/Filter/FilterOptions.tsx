@@ -1,4 +1,4 @@
-import styles from '../../../styles/filter/FilterOptions.module.css'
+import styles from '../../styles/filter/FilterOptions.module.css'
 import { Karla } from '@next/font/google'
 
 const karla = Karla({

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import styles from '../../../styles/hero/HeroImage.module.css'
+import styles from '../../styles/hero/HeroImage.module.css'
 import { Montserrat } from '@next/font/google'
 
 const montserrat = Montserrat({

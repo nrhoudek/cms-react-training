@@ -4,7 +4,7 @@ import { favoritesContext, favoritesContextType } from '../../context/favorites'
 import { ComicData, ComicThumbnail } from '../../types/shared_types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
-import styles from '../../../styles/filter/FavoritesItem.module.css'
+import styles from '../../styles/filter/FavoritesItem.module.css'
 import { Karla } from '@next/font/google'
 
 const karla = Karla({

@@ -1,4 +1,4 @@
-import styles from '../../../styles/footer/Footer.module.css'
+import styles from '../../styles/footer/Footer.module.css'
 import { Montserrat } from '@next/font/google'
 
 const montserrat = Montserrat({
