@@ -1,16 +1,16 @@
 import { useContext } from 'react'
 import Image from 'next/image'
+import { favoritesContext, favoritesContextType } from '../../context/favorites'
+import { ComicData } from '../../types/shared_types'
 import Button from './Button'
 import Detail from './Detail'
-import { favoritesContext, favoritesContextType } from '../../context/favorites'
 import styles from '../../../styles/comic/Comic.module.css'
-import { ComicData } from '../../types/shared_types'
 
 type comicDataProps = {
-	comicData: ComicData
+	comicData: ComicData;
 }
 
-export function Comic({ comicData }: comicDataProps) {
+export default function Comic({ comicData }: comicDataProps) {
 	if(!comicData) return null;
 
 	const context = useContext<favoritesContextType>(favoritesContext)

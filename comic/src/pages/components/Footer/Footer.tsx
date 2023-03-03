@@ -3,9 +3,8 @@ import FooterLink from './FooterLink'
 import Copyright from './Copyright'
 import styles from '../../../styles/footer/Footer.module.css'
 
-
 export default function Footer() {
-	return ( 
+	return (
 		<footer className={styles.footerContainer}>
 			<Image
 				src='/logo.svg'

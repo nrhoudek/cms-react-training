@@ -11,12 +11,13 @@ const karla = Karla({
 type PagerProps = {
 	firstComicIndex: number;
 	totalComics: number;
-	handlePagination: (event: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) => void
+	comicLimit: number;
+	handlePagination: (event: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) => void;
 }
 
-export default function Pager({firstComicIndex, totalComics, handlePagination}: PagerProps) {
-	const firstIndex = totalComics > 0 ? firstComicIndex + 1 : 0
-	const lastIndex = firstComicIndex + 15 > totalComics ? totalComics : firstComicIndex + 15
+export default function Pager({firstComicIndex, totalComics, handlePagination, comicLimit}: PagerProps) {
+	const firstIndex = totalComics > 0 ? firstComicIndex + 1 : 0;
+	const lastIndex = firstComicIndex + comicLimit > totalComics ? totalComics : firstComicIndex + comicLimit;
 
 	return (
 		<div className={styles.pagerContainer}>

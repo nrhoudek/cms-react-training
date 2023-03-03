@@ -10,9 +10,9 @@ const montserrat = Montserrat({
 })
 
 type FilterButton = {
-	caption: string,
-	icon: IconDefinition,
-	handleClick : React.MouseEventHandler
+	caption: string;
+	icon: IconDefinition;
+	handleClick : React.MouseEventHandler;
 }
 
 export default function FilterButton({ caption, icon, handleClick }: FilterButton) {

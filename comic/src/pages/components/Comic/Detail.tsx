@@ -1,6 +1,6 @@
 import Moment from 'react-moment';
-import styles from '../../../styles/comic/Comic.module.css'
 import {ComicCreator, CreatorItem} from '../../types/shared_types'
+import styles from '../../../styles/comic/Comic.module.css'
 import { Montserrat, Karla } from '@next/font/google'
 
 const montserrat = Montserrat({
@@ -14,14 +14,14 @@ const karla = Karla({
 })
 
 type DetailProps = {
-	title: string,
-	issueNumber: number,
-	publishDate: string,
-	creators: ComicCreator
+	title: string;
+	issueNumber: number;
+	publishDate: string;
+	creators: ComicCreator;
 }
 
 export default function Detail(props: DetailProps) {
-	const {title, issueNumber, publishDate, creators } = props
+	const { title, issueNumber, publishDate, creators } = props
 
 	return (
 		<div className={styles.contentSection}>

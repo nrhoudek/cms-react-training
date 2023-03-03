@@ -46,7 +46,6 @@ export default function Filter({ updateFilter }: FilterProps) {
 					<FilterOptions updateFilter={updateFilter} />
 				</div>
 			</div>
-			
 		</>
 	)
 }

@@ -1,8 +1,7 @@
 import { useState, useContext } from 'react'
 import { favoritesContext, favoritesContextType } from '../../context/favorites'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBoltLightning, faBars } from '@fortawesome/free-solid-svg-icons'
 import styles from '../../../styles/header/Navigation.module.css'
 import { Montserrat } from '@next/font/google'
 
@@ -13,12 +12,11 @@ const montserrat = Montserrat({
 
 export default function Navigation() {
 	const [showNav, setShowNav] = useState<boolean>(false);
+	const context = useContext<favoritesContextType>(favoritesContext)
 
 	function toggleNav(): void {
-		setShowNav(!showNav);
+		setShowNav(prev => !prev);
 	}
-
-	const context = useContext<favoritesContextType>(favoritesContext)
 
 	return (
 		<div className={`${styles.navigationContainer} ${montserrat.variable}`}>

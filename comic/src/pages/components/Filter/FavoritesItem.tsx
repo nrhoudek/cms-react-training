@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import Image from 'next/image'
-import { ComicData, ComicThumbnail } from '../../types/shared_types'
 import { favoritesContext, favoritesContextType } from '../../context/favorites'
+import { ComicData, ComicThumbnail } from '../../types/shared_types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import styles from '../../../styles/filter/FavoritesItem.module.css'
@@ -24,7 +24,7 @@ type removeFromFavorites = () => void;
 
 
 export default function FavoritesItem( props: FavoriteItemProp ) {
-	const {id, title, issueNumber, thumbnail } = props
+	const { id, title, issueNumber, thumbnail } = props
 
 	const context = useContext<favoritesContextType>(favoritesContext)
 
