@@ -89,7 +89,14 @@
 		max-height: unset;
 	}
 
+	.slideTitle {
+		font-size: 1.125rem;
+		line-height: calc(22 / 18);
+	}
+
 	.cta {
+		height: 30px;
+		width: 30px;
 		top: unset;
 		bottom: -15px;
 		left: 50%;

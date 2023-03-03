@@ -1,15 +1,11 @@
 import { useEffect, useState, useContext } from 'react'
-import { queryContext, queryContextType } from '../context/query';
 import { ComicData } from '../types/shared_types'
 
-export default function useFetch(url: string): {isLoading: boolean, comics: ComicData[], serverError: string | unknown} {
+export default function useFetch(url: string): {isLoading: boolean, comics: ComicData[], total: number, serverError: string | unknown} {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [serverError, setServerError] = useState<string | unknown>('');
 	const [comics, setComics] = useState<ComicData[]>([]);
-
-	// let context = useContext<queryContextType>(queryContext)
-	// console.log('query hiho', context.query)
-	// console.log(url)
+	const [total, setTotal] = useState<number>(0);
 
 	const fetchData = async () => {
 		try {
@@ -17,8 +13,8 @@ export default function useFetch(url: string): {isLoading: boolean, comics: Comi
 			const data = await res.json();
 	
 			setComics(data.data.results);
+			setTotal(data.data.total)
 			setIsLoading(false);
-			console.log(data.data.results)
 		} catch (error) {
 			console.error(error);
 			setServerError(error);
@@ -30,5 +26,5 @@ export default function useFetch(url: string): {isLoading: boolean, comics: Comi
 		fetchData();
 	}, [url]);
 
-	return { isLoading, comics, serverError };
+	return { isLoading, comics, total, serverError };
 };

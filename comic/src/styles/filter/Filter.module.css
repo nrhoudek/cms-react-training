@@ -2,9 +2,9 @@
 	width: 100%;
 	position: relative;
 	background: #222222;
-	padding: 20px 10px;
+	padding: 17px 10px;
 	max-width: 1075px;
-	margin: 0 auto 1px;
+	margin: 0 auto 20px;
 }
 
 .mobileFilter {
@@ -48,7 +48,7 @@
 	.desktopFilter {
 		display: flex;
 		align-items: center;
-		gap: 10px;
+		gap: 9px;
 	}
 
 	.filterLabel {

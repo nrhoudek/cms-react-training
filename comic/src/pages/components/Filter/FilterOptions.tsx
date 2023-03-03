@@ -1,6 +1,3 @@
-import { useState, useContext, useEffect } from 'react'
-import useFetch from '../../hooks/useFetch'
-import { queryContext, queryContextType } from '../../context/query'
 import styles from '../../../styles/filter/FilterOptions.module.css'
 import { Karla } from '@next/font/google'
 

@@ -27,7 +27,7 @@
 	height: 112px;
 	z-index: 1;
 	background: url(../../../public/halftone.png);
-	background-size: cover;
+	background-size: 100%;
 	background-repeat: no-repeat;
 	background-position: center bottom;
 	pointer-events: none;
@@ -68,7 +68,7 @@
 	}
 
 	.heroContainer::after {
-		height: 176px;
+		height: 250px;
 		bottom: -20px;
 		z-index: 1;
 	}

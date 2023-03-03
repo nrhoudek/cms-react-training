@@ -1,11 +1,11 @@
 import Head from 'next/head'
-import { useState, useEffect, useRef } from 'react'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { useState, useEffect, useRef } from 'react'
 import { Comic } from './components/Comic/Comic'
 import  Favorites from './components/Filter/Favorites'
 import { ComicData } from './types/shared_types'
 import { favoritesContext } from './context/favorites'
-import { queryContext } from './context/query'
+import Pager from './components/Pager/Pager'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 import HeroImage from './components/HeroImage/HeroImage'
@@ -13,8 +13,14 @@ import Intro from './components/Common/Intro'
 import Filter from './components/Filter/Filter'
 import useFetch from './hooks/useFetch'
 import styles from '../styles/home/Home.module.css'
+import { Montserrat} from '@next/font/google'
 
 const md5 = require('md5');
+
+const montserrat = Montserrat({
+	subsets: ['latin'],
+	variable: '--font-display',
+})
 
 //Runs this function serverside before build. Allows private API key to stay private.
 export const getStaticProps: GetStaticProps = async() =>  {
@@ -23,16 +29,17 @@ export const getStaticProps: GetStaticProps = async() =>  {
 	const publicKey: string = process.env.PUBLIC_API_KEY
 	const requiredParameters = `ts=${timestamp}&apikey=${publicKey}&hash=${hash}`
 
-	let API_URL: string = `https://gateway.marvel.com/v1/public/comics?${requiredParameters}`
+	let API_URL: string = `https://gateway.marvel.com/v1/public/comics?limit=15&offset=0&${requiredParameters}`
 	return { props: { API_URL, requiredParameters } }
 }
 
 export default function Home({ API_URL, requiredParameters }: InferGetStaticPropsType<typeof getStaticProps>) {
 	const [query, setQuery] = useState<string>(API_URL);
-	const { isLoading, serverError, comics } = useFetch(query);
 	const [favorites, setFavorites] = useState<ComicData[]>([]);
 	const [characterId, setCharacterId] = useState<string>('');
 	const [creatorId, setCreatorId] = useState<string>('');
+	const [offset, setOffset] = useState<number>(0)
+	const { isLoading, serverError, comics, total } = useFetch(query);
 	let initialRender = useRef(true);
 
 	useEffect(() => {
@@ -47,14 +54,14 @@ export default function Home({ API_URL, requiredParameters }: InferGetStaticProp
 			let newQuery: string;
 
 			if (characterId !== '' && creatorId === '') {
-				newQuery=`https://gateway.marvel.com/v1/public/characters/${characterId}/comics?${requiredParameters}`
+				newQuery=`https://gateway.marvel.com/v1/public/characters/${characterId}/comics?limit=15&offset=${offset}&${requiredParameters}`
 			} else if (characterId === '' && creatorId !== '') {
-				newQuery=`https://gateway.marvel.com/v1/public/creators/${creatorId}/comics?${requiredParameters}`
+				newQuery=`https://gateway.marvel.com/v1/public/creators/${creatorId}/comics?limit=15&offset=${offset}&${requiredParameters}`
 			} else if (characterId !== '' && creatorId !== '') {
-				newQuery = `https://gateway.marvel.com/v1/public/creators/${creatorId}/comics?characters=${characterId}&${requiredParameters}`
+				newQuery = `https://gateway.marvel.com/v1/public/creators/${creatorId}/comics?limit=15&offset=${offset}&characters=${characterId}&${requiredParameters}`
 			}
 			else {
-				newQuery = API_URL;
+				newQuery = `https://gateway.marvel.com/v1/public/comics?limit=15&offset=${offset}&${requiredParameters}`;
 			}
 			setQuery(newQuery);
 		}
@@ -63,14 +70,37 @@ export default function Home({ API_URL, requiredParameters }: InferGetStaticProp
 		return () => {
 			initialRender.current = false;
 		}
-	}, [characterId, creatorId])
+	}, [characterId, creatorId, offset])
 
 	function updateFilter(event: React.ChangeEvent) {
 		const target = event.target as HTMLSelectElement;
 		const id = target.value;
 		const name = target.name;
 
+		setOffset(0);
 		name === 'characterFilter' ? setCharacterId(id) : setCreatorId(id)
+	}
+
+	function handlePagination(event: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) {
+		const target = event.currentTarget;
+		const name = target.name;
+
+
+		if (name === 'prev') {
+			if (offset === 0) {
+				return;
+			} else {
+				setOffset(prev => prev - 15);
+			}
+		} 
+
+		if (name === "next") {
+			if (offset + 15 > total) {
+				return;
+			} else {
+				setOffset(prev => prev + 15);
+			}
+		}
 	}
 
 	const contextValue = {
@@ -93,27 +123,26 @@ export default function Home({ API_URL, requiredParameters }: InferGetStaticProp
 
 				<main className={styles.main}>
 					<Intro />
-
-					{isLoading && <h2>Loading Comics...</h2>}
-					{serverError && !isLoading && <h2>Error Loading Comics</h2>}
-					{!serverError && !isLoading && comics.length === 0 && <h2>No comics match filter requirements</h2>}
-					{!serverError && !isLoading && comics &&
 						<div className={styles.gridContainer}>
 							<Filter updateFilter={updateFilter}/>
-							<div className={styles.slides}>
-								{comics.map(comic =>
-									<Comic 
-										key={comic.id}
-										comicData = {comic}
-									/>
-								)}
+							<div className={!isLoading && !serverError && comics.length > 0 ? styles.slides : styles.messageContainer}>
+								{
+									isLoading ? <h2 className={`${styles.notification} ${montserrat.variable}`}>Preparing Comics!</h2>
+									: !isLoading && serverError ? <h2 className={`${styles.notification} ${montserrat.variable}`}>UH-OH! There was an error loading the comics!</h2>
+									: !isLoading && !serverError && comics.length === 0 ? <h2 className={`${styles.notification} ${montserrat.variable}`}>Weird! There are no comics that match the filter requirements!</h2>
+									: comics.map(comic =>
+										<Comic 
+											key={comic.id}
+											comicData = {comic}
+										/>
+									)
+								}
 							</div>
 							<div className={styles.desktopFavorites}>
 								<Favorites handleCloseButtonClick={() => null} />
 							</div>
+							<Pager totalComics={total} firstComicIndex={offset} handlePagination={handlePagination}/>
 						</div>
-					}
-					
 				</main>
 				
 				<Footer />
