@@ -75,7 +75,7 @@ export default function Home({ API_URL, requiredParameters, comicLimit }: InferG
 		}
 	}, [characterId, creatorId, offset])
 
-	function updateFilter(event: React.ChangeEvent) {
+	function updateFilter(event: React.ChangeEvent): void {
 		const target = event.target as HTMLSelectElement;
 		const id = target.value;
 		const name = target.name;
@@ -85,7 +85,7 @@ export default function Home({ API_URL, requiredParameters, comicLimit }: InferG
 		name === 'characterFilter' ? setCharacterId(id) : setCreatorId(id)
 	}
 
-	function handlePagination(event: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>) {
+	function handlePagination(event: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>): void {
 		const target = event.currentTarget;
 		const name = target.name;
 
@@ -95,9 +95,7 @@ export default function Home({ API_URL, requiredParameters, comicLimit }: InferG
 			} else {
 				setOffset(prev => prev - comicLimit);
 			}
-		} 
-
-		if (name === "next") {
+		} else {
 			if (offset + 15 > total) {
 				return;
 			} else {

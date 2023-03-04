@@ -9,6 +9,7 @@ export default function useFetch(url: string): {isLoading: boolean, comics: Comi
 
 	const fetchData = async () => {
 		try {
+			setIsLoading(true);
 			const res = await fetch(url);
 			const data = await res.json();
 	

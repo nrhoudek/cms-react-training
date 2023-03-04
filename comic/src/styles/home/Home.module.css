@@ -46,6 +46,7 @@
 @media (min-width: 64em) {
 	.gridContainer {
 		grid-template-columns: 1fr 265px;
+		grid-template-rows: 60px minmax(1000px, 1fr) 35px;
 		column-gap: 60px;
 		row-gap: 40px;
 		place-items: start;
@@ -68,7 +69,7 @@
 
 	.desktopFavorites {
 		display: block;
-		grid-row: 1;
+		grid-row: 1 / -1;
 		grid-column: 2;
 	}
 }
