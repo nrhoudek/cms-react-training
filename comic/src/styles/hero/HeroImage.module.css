@@ -54,9 +54,9 @@
 	font-size: 1.6875rem;
 	font-weight: 900;
 	line-height: 1.25;
-	color: #f8f8f2;
+	color: var(--off-white);
 	text-align: center;
-	text-shadow: 2px 2px 0 #222222;
+	text-shadow: 2px 2px 0 var(--dark-gray);
 	background-color: rgba(194, 72, 104, 0.9);
 	padding: 16px 32px;
 }
@@ -77,7 +77,7 @@
 		width: 100%;
 		max-width: 572px;
 		font-size: 3.8125rem;
-		text-shadow: 3px 3px 0 #222222;
+		text-shadow: 3px 3px 0 var(--dark-gray);
 		padding: 36px 69px;
 	}
 }

@@ -5,7 +5,7 @@
 	left: 0;
 	transform: translateY(100%);
 	z-index: 1;
-	background-color: #222222;
+	background-color: var(--dark-gray);
 	max-width: 1075px;
 	margin: 0 auto;
 }
@@ -19,7 +19,7 @@
 	font-size: 1.5625rem;
 	font-weight: 900;
 	line-height: 1.2;
-	color: #f8f8f2;
+	color: var(--off-white);
 	margin-bottom: 30px;
 }
 
@@ -37,8 +37,8 @@
 	font-size: 0.875rem;
 	font-weight: 700;
 	line-height: 1;
-	color: #f8f8f2;
-	background-color: #c24868;
+	color: var(--off-white);
+	background-color: var(--pink);
 	padding: 13px;
 	border: unset;
 	width: 100%;
@@ -46,7 +46,7 @@
 }
 
 .closeButton svg {
-	color: #f8f8f2;
+	color: var(--off-white);
 	margin-left: 5px;
 }
 
