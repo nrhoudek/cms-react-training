@@ -1,17 +1,7 @@
 import Moment from 'react-moment';
 import {ComicCreator, CreatorItem} from '../../types/shared_types'
 import styles from '../../styles/comic/Comic.module.css'
-import { Montserrat, Karla } from '@next/font/google'
-
-const montserrat = Montserrat({
-	subsets: ['latin'],
-	variable: '--font-display',
-})
-
-const karla = Karla({
-	subsets: ['latin'],
-	variable: '--font-body',
-})
+import { montserrat, karla } from '../../fonts/index'
 
 type DetailProps = {
 	title: string;

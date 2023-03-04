@@ -1,13 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import styles from '../../styles/filter/Filter.module.css'
-
-import { Montserrat } from '@next/font/google'
-
-const montserrat = Montserrat({
-	subsets: ['latin'],
-	variable: '--font-display',
-})
+import { montserrat } from '../../fonts/index'
 
 type FilterButton = {
 	caption: string;

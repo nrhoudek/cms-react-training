@@ -1,12 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import styles from '../../styles/pager/Pager.module.css'
-import { Karla } from '@next/font/google'
-
-const karla = Karla({
-	subsets: ['latin'],
-	variable: '--font-body',
-})
+import { karla } from '../../fonts/index'
 
 type PagerProps = {
 	firstComicIndex: number;

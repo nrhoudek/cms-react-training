@@ -1,10 +1,5 @@
 import styles from '../../styles/footer/Footer.module.css'
-import { Montserrat } from '@next/font/google'
-
-const montserrat = Montserrat({
-	subsets: ['latin'],
-	variable: '--font-display',
-})
+import { montserrat } from '../../fonts/index'
 
 export default function Copyright() {
 	const date = new Date()

@@ -22,7 +22,7 @@ export default function Comic({ comicData }: comicDataProps) {
 	const altDescription = `${comicData.title} issue:${comicData.issueNumber} cover art`
 
 	return (
-		<div className={styles.slide} data-testid='comic-parent'>
+		<article className={styles.slide} data-testid='comic-parent'>
 			<Detail
 				title={comicData.title}
 				issueNumber={comicData.issueNumber}
@@ -43,6 +43,6 @@ export default function Comic({ comicData }: comicDataProps) {
 					isFavoritesFull={isFavoritesFull}
 				/>
 			</div>
-		</div>
+		</article>
 	)
 }

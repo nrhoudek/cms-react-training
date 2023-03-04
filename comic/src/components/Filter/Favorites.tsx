@@ -3,14 +3,8 @@ import { favoritesContextType, favoritesContext } from '../../context/favorites'
 import FavoritesItem from './FavoritesItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoltLightning } from '@fortawesome/free-solid-svg-icons'
+import { montserrat } from '../../fonts/index'
 import styles from '../../styles/filter/Favorites.module.css'
-
-import { Montserrat } from '@next/font/google'
-
-const montserrat = Montserrat({
-	subsets: ['latin'],
-	variable: '--font-display',
-})
 
 type FavoritesProps = {
 	handleCloseButtonClick: React.MouseEventHandler;
@@ -20,9 +14,9 @@ export default function Favorites({handleCloseButtonClick}: FavoritesProps) {
 	const context = useContext<favoritesContextType>(favoritesContext)
 
 	return (
-		<div className={styles.favoritesContainer}>
+		<div className={`${styles.favoritesContainer} ${montserrat.variable}`}>
 			<div className={styles.inner}>
-				<h2 className={`${styles.favoritesTitle} ${montserrat.variable}`}>Favorites</h2>
+				<h2 className={styles.favoritesTitle}>Favorites</h2>
 				<div className={styles.comicGrid}>
 					{
 						context.favorites.map((comic) => {
@@ -40,7 +34,7 @@ export default function Favorites({handleCloseButtonClick}: FavoritesProps) {
 				</div>
 			</div>
 			<button
-				className={`${styles.closeButton} ${montserrat.variable}`}
+				className={styles.closeButton}
 				onClick={handleCloseButtonClick}
 			>
 				Hide Favorites

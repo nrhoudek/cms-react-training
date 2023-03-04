@@ -4,13 +4,7 @@ import FilterOptions from './FilterOptions'
 import Favorites from './Favorites'
 import { faBoltLightning, faFilter } from '@fortawesome/free-solid-svg-icons'
 import styles from '../../styles/filter/Filter.module.css'
-
-import { Montserrat } from '@next/font/google'
-
-const montserrat = Montserrat({
-	subsets: ['latin'],
-	variable: '--font-display',
-})
+import { montserrat } from '../../fonts/index'
 
 type FilterProps = {
 	updateFilter(event: React.ChangeEvent): void;
@@ -22,7 +16,7 @@ export default function Filter({ updateFilter }: FilterProps) {
 
 	return (
 		<>
-			<div className={styles.filterContainer}>
+			<div className={`${styles.filterContainer} ${montserrat.variable}`}>
 				<div className={styles.mobileFilter}>
 					<FilterButton caption={"Filter"} icon={faFilter} handleClick={() => {
 							setShowFavorites(false);
@@ -42,7 +36,7 @@ export default function Filter({ updateFilter }: FilterProps) {
 					}
 				</div>
 				<div className={styles.desktopFilter}>
-					<span className={`${styles.filterLabel} ${montserrat.variable}`}>Filter By: </span>
+					<span className={styles.filterLabel}>Filter By: </span>
 					<FilterOptions updateFilter={updateFilter} />
 				</div>
 			</div>

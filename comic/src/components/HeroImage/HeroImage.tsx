@@ -1,11 +1,6 @@
 import Image from 'next/image'
 import styles from '../../styles/hero/HeroImage.module.css'
-import { Montserrat } from '@next/font/google'
-
-const montserrat = Montserrat({
-	subsets: ['latin'],
-	variable: '--font-display',
-})
+import { montserrat } from '../../fonts/index'
 
 export default function HeroImage() {
 return (
